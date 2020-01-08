@@ -127,7 +127,7 @@ b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Underweighted");
       else if (bmi>25 && bmi<=30){
         b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Overweighted");
 
-      } else(
+      } else (
         b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Obesed")
       ); 
       Navigator.push(context, MaterialPageRoute(
