@@ -1,4 +1,9 @@
-# bmiapp
+# Bmi App
+- Calculate your Heath status easily 
+- Beautiful flutter baised UI 
+- One click result 
+
+
 
 A new Flutter project.
 
