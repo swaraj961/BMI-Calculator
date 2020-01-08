@@ -1,3 +1,5 @@
+import 'package:bmiapp/bmimodels.dart';
+import 'package:bmiapp/resultscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 void main () => runApp(new MyApp());
@@ -22,7 +24,9 @@ class BmiCalculatorScreen extends StatefulWidget {
 
 class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
   double heightofuser = 100.0; //default height
-  double weightofuser =40.0;
+  double weightofuser = 40.0;
+ BMIModel b1; //obj of the modelbmi
+  double bmi= 0;
   @override
   Widget build(BuildContext context) {
 
@@ -55,21 +59,23 @@ padding: EdgeInsets.only(left: 16,right: 16),
 child: new Slider(
   min:80.0 , //start point of slider
   max:250.0, // end point of slider
- onChanged: (height){
+ onChanged: (slidevalue){
    setState(() {
-     heightofuser = height;  
+     heightofuser = slidevalue;  
    });
  },
  value: heightofuser,
  divisions: 100,
-label: "$heightofuser", //reference of height to user
+ activeColor: Colors.pink,
+label: "$heightofuser", //reference of height to user for lable
   
 ),
 
       ),
-       Text("$heightofuser cm ",style: TextStyle(color: Colors.red,fontSize: 14,fontWeight: FontWeight.w900),),
-//for weight
-SizedBox(
+       Text("$heightofuser cm ",style: TextStyle(color: Colors.red,fontSize: 14,fontWeight: FontWeight.w900),), //display height
+
+//for weight display slider
+SizedBox( //padding
   height:24 ,
 ),
  Text("weight (kg) ",style: TextStyle(color: Colors.grey,fontSize: 24,fontWeight: FontWeight.w500),),
@@ -79,13 +85,14 @@ padding: EdgeInsets.only(left: 16,right: 16),
 child: new Slider(
   min:30.0 , //start point of slider
   max:150.0, // end point of slider
- onChanged: (height){
+ onChanged: (slidevalue){
    setState(() {
-     weightofuser = height;  
+     weightofuser = slidevalue;  
    });
  },
  value: weightofuser,
  divisions: 100,
+ activeColor: Colors.pink,
 label: "$weightofuser", //reference of height to user
   
 ),
@@ -99,22 +106,45 @@ Container(
   width: double.infinity,
   padding: EdgeInsets.only(left: 16,right: 16),
   child: FlatButton.icon(
-  onPressed: (){
-    
-  },
-  label: new Text("CALCULATE")  ,
+    label: new Text("CALCULATE")  ,
   icon: Icon(Icons.favorite,color:Colors.white),
-  color: Colors.red,
+  color: Colors.pink,
+  
+  onPressed: (){
 
-)
-,
+    setState((
+  
+    ) {
+      bmi = weightofuser/(heightofuser/100)*(heightofuser/100);
+      
+      if(bmi>=18.5 && bmi <= 25)
+      { b1=BMIModel(bmi: bmi,isNormal:true,comments: "You are Fit");
+     
+      } else if ( bmi<18.5) {
+b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Underweighted");
+      }
 
+      else if (bmi>25 && bmi<=30){
+        b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Overweighted");
+
+      } else(
+        b1=BMIModel(bmi: bmi,isNormal:false,comments: "You are Obesed")
+      ); 
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context )=> ResultScreen(b1: b1,),
+         //passing the screen we want to go so used the navigator tool
+      ))  ; 
+  },
+
+);
+  }
+
+  ),
 )
   ],
-),
-
-)
-      )
+  ),
+  ),
+      ),
     );
     
   }
