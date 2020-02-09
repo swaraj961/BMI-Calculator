@@ -26,13 +26,16 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              
+            
               Container(
                 height: 200,
                 width: 200,
+                
                 child: SvgPicture.asset("assets/images/heart.svg", fit: BoxFit.contain,),
               ),
               SizedBox(
-                height: 8,
+                height: 10,
               ),
               Text("BMI Calculator", style: TextStyle(color: Colors.red[700], fontSize: 34, fontWeight: FontWeight.w700),),
               Text("We care about your health", style: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w400),),
