@@ -26,9 +26,14 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              
+              SizedBox(
+                height:30,
+              ),
+            
             
               Container(
+              
+                
                 height: 200,
                 width: 200,
                 
